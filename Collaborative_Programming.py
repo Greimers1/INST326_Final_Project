@@ -1,11 +1,22 @@
-"""
-"""
-class Car:
-    """ Represents a car. 
-    """
-    def testing:
-    
+import re
 
+"""
+"""
+class Game:
+    """ Represents a game. 
+    """
+    
+    
+    def regex(text):
+        pattern  = r"""Q(?P<q_number>\d+): (?P<question>.*?[?])\nA(?P<a_number>
+                            \d+): (?P<answer>.*?)$"""
+        matches = re.search(pattern, text)
+        for match in matches:
+            q_number = match.group('q_number')
+            question = match.group('question')
+            a_number = match.group('a_number')
+            answer = match.group('answer')
+    
 
 
 class Driver : 
