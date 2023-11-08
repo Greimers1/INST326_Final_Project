@@ -2,11 +2,9 @@ import re
 
 """
 """
-class Game:
-    """ Represents a game. o 
 class TriviaGame:
     """ Represents a game. 
-    """
+    """ 
     
     def regex(text):
         pattern  = r"""Q(?P<q_number>\d+): (?P<question>.*?[?])\nA(?P<a_number>
