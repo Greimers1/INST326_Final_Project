@@ -2,10 +2,9 @@ import re
 
 """
 """
-class Game:
+class TriviaGame:
     """ Represents a game. 
     """
-    
     
     def regex(text):
         pattern  = r"""Q(?P<q_number>\d+): (?P<question>.*?[?])\nA(?P<a_number>
@@ -16,7 +15,9 @@ class Game:
             question = match.group('question')
             a_number = match.group('a_number')
             answer = match.group('answer')
-    
+    def read_file(file):
+        return None
+
 
 
 class Driver : 
