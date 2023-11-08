@@ -22,6 +22,8 @@ class TriviaGame:
 
 
 
+
+
 class ScoreKeeper:
     def __init__(self, player_score, computer_score):
         self.player_score = 0
@@ -59,17 +61,3 @@ class ScoreKeeper:
             # This will print if the game is still going and the display_score function is called
             print(f"The score is: \n Player: {pscore}\nComputer: {cscore}")
         
-
-
-class Driver : 
-    """Represents a driver in the car. 
-    """
-    
-class Road:
-    """Represents the road that is driven on
-    """
-    
-class Route: 
-    """ Represents the route that must be taken to reach the destination.
-    """
-    
