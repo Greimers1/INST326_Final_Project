@@ -6,17 +6,21 @@ class TriviaGame:
     """ Represents a game. 
     """ 
     
-    def regex(text):
+    def __init__(self, line):
         pattern  = r"""Q(?P<q_number>\d+): (?P<question>.*?[?])\nA(?P<a_number>
                             \d+): (?P<answer>.*?)$"""
-        matches = re.search(pattern, text)
+        matches = re.search(pattern, line)
         for match in matches:
             q_number = match.group('q_number')
             question = match.group('question')
             a_number = match.group('a_number')
             answer = match.group('answer')
+            
     def read_file(file):
-        return None
+        with open(file, 'r', encoding = "utf-8") as f:
+            game = [TriviaGame(line.strip()) for line in f]
+        return game
+    
 
 
 
@@ -59,3 +63,4 @@ class ScoreKeeper:
             # This will print if the game is still going and the display_score function is called
             print(f"The score is: \n Player: {pscore}\nComputer: {cscore}")
         
+
