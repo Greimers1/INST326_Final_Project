@@ -27,14 +27,55 @@ class TriviaGame:
 
 
 class ScoreKeeper:
-    def __init__(self, player_score, computer_score):
+    def __init__(self):
         self.player_score = 0
-        self.computer_score = 0 
+        self.computer_score = 0
         
-    def get_player_score(self):
+    def get_player_score(self, player_answer, correct_answer):
+        """ Calculates the player's score
+        
+        Args:
+            player_answer(str): the answer the player provided.
+            correct_answer(str): the correct answer.
+            
+        Side effects:
+            Changes the score for the player.
+            
+        Returns: 
+            self.player_score(int): the player's updated score.
+        """
+    
+        if player_answer == correct_answer:
+            self.player_score += 1
+            print (f"You now have {self.player_score} points!")
+        else: 
+            self.player_score += 0
+            print (f"You now have {self.player_score} points")
+                
         return self.player_score
     
-    def get_computer_score(self):
+    
+    def get_computer_score(self, computer_answer, correct_answer):
+        """ Calculates the computer's score
+        
+        Args:
+            computer_answer(str): the answer the computer provided.
+            correct_answer(str): the correct answer.
+            
+        Side effects:
+            Changes the score for the computer.
+            
+        Returns: 
+            computer.player_score(int): the computer's updated score.
+        """
+    
+        if computer_answer == correct_answer:
+            self.computer_score+= 1
+            print (f"You now have {self.computer_score} points!")
+        else: 
+            self.computer_score += 0
+            print (f"You now have {self.computer_score} points.")
+        
         return self.computer_score
         
     def display_score(self, last_question):
