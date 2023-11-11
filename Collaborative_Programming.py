@@ -1,4 +1,5 @@
 import re
+import argparse
 
 """
 """
@@ -117,3 +118,9 @@ class Timer:
         while self.start_time is not None: 
             time_passed = self.end_time - self.start_time
             print (f"time elasped: {time_passed} seconds ") 
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Trivia Game')
+    parser.add_argument('file_path', help='Path to the file containing trivia questions.')
+    args = parser.parse_args()
+    file_path = args.file_path()  
