@@ -103,3 +103,17 @@ class ScoreKeeper:
         else:
             # This will print if the game is still going and the display_score function is called
             print(f"The score is: \n Player: {pscore}\nComputer: {cscore}")
+
+class Timer: 
+    def __init__(self): 
+        self.start_time = None
+        self.end_time = None
+        
+    def start(self): 
+         self.start_time = timed()
+    
+    def end (self): 
+        self.end_time = timed()
+        while self.start_time is not None: 
+            time_passed = self.end_time - self.start_time
+            print (f"time elasped: {time_passed} seconds ") 
