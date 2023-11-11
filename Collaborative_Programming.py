@@ -1,4 +1,5 @@
 import re
+import argparse
 
 """
 """
@@ -103,5 +104,9 @@ class ScoreKeeper:
         else:
             # This will print if the game is still going and the display_score function is called
             print(f"The score is: \n Player: {pscore}\nComputer: {cscore}")
-        
-
+              
+def parse_args():
+    parser = argparse.ArgumentParser(description='Run a trivia game from a file.')
+    parser.add_argument('file', type=str, help='Path to the trivia game file')
+    args = parser.parse_args()
+    return args
