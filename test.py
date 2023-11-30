@@ -5,7 +5,7 @@ import random
 
 class TriviaGame:
     def __init__(self, line):
-        pattern = r"Q(\d+): (.*?[?])\s*\nA(\d+): (.*)$"
+        pattern = r"""(?x)Q(?P<q_number>\d+): (?P<question>.*?[?])\nA(?P<a_number>\d+): (?P<answer>.*?)$"""
         match = re.search(pattern, line, re.IGNORECASE)
         if not match:
             raise ValueError(f"Invalid format for trivia question: {line}")
