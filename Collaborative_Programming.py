@@ -1,4 +1,5 @@
 import re
+from time import time
 import argparse
 
 """
@@ -21,6 +22,12 @@ class TriviaGame:
         with open(file, 'r', encoding = "utf-8") as f:
             game = [TriviaGame(line.strip()) for line in f]
         return game
+    
+    def display_question(self):
+        print(f"Question {self.q_number}: {self.question}")
+
+    def get_answer(self):
+        return input("Your answer: ").strip()
     
 
 
@@ -111,10 +118,10 @@ class Timer:
         self.end_time = None
         
     def start(self): 
-         self.start_time = timed()
+         self.start_time = time()
     
     def end (self): 
-        self.end_time = timed()
+        self.end_time = time()
         while self.start_time is not None: 
             time_passed = self.end_time - self.start_time
             print (f"time elasped: {time_passed} seconds ") 
@@ -124,3 +131,21 @@ if __name__ == "__main__":
     parser.add_argument('file_path', help='Path to the file containing trivia questions.')
     args = parser.parse_args()
     file_path = args.file_path()  
+    
+    with open(file_path, 'r', encoding='utf-8') as f:
+        games = [TriviaGame(line.strip()) for line in f]
+
+    score_keeper = ScoreKeeper()
+    timer = Timer()
+
+    for game in games:
+        game.display_question()
+        timer.start()
+        player_answer = game.get_answer()
+        timer.end()
+
+        score_keeper.get_player_score(player_answer, game.answer)
+        score_keeper.get_computer_score(game.answer)
+        score_keeper.display_score()
+
+    score_keeper.determine_winner()
