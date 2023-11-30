@@ -4,11 +4,16 @@ import time
 import random
 
 class TriviaGame:
-    def __init__(self, q_number, question, a_number, answer):
-        self.q_number = q_number
-        self.question = question
-        self.a_number = a_number
-        self.answer = answer
+    def __init__(self, line):
+        pattern = r"Q(\d+): (.*?[?])\s*\nA(\d+): (.*)$"
+        match = re.search(pattern, line, re.IGNORECASE)
+        if not match:
+            raise ValueError(f"Invalid format for trivia question: {line}")
+        
+        self.q_number = int(match.group(1))
+        self.question = match.group(2)
+        self.a_number = int(match.group(3))
+        self.answer = match.group(4)
 
     def display_question(self):
         print(f"Question {self.q_number}: {self.question}")
@@ -61,28 +66,14 @@ class Timer:
         time_passed = self.end_time - self.start_time
         print(f"Time elapsed: {time_passed} seconds")
 
-def read_questions(file_path):
-    with open(file_path, 'r', encoding='utf-8') as f:
-        questions = [line.strip() for line in f.readlines()]
-    return questions
-
-def create_trivia_games(questions):
-    games = []
-    for i in range(0, len(questions), 2):
-        q_number = (i // 2) + 1
-        question = questions[i]
-        answer = questions[i + 1]
-        games.append(TriviaGame(q_number, question, 1, answer))
-    return games
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Trivia Game')
     parser.add_argument('file_path', help='Path to the file containing trivia questions.')
     args = parser.parse_args()
     file_path = args.file_path
 
-    questions = read_questions(file_path)
-    games = create_trivia_games(questions)
+    with open(file_path, 'r', encoding='utf-8') as f:
+        games = [TriviaGame(line.strip()) for line in f]
 
     score_keeper = ScoreKeeper()
     timer = Timer()

@@ -4,7 +4,7 @@ A1: magic method
 Q2: What is 5 + 5?
 A2: 10
 
-Q3: Symbol for sodium??
+Q3: Symbol for sodium?
 A3: na
 
 Q4: Element for FE?
