@@ -97,9 +97,9 @@ class ScoreKeeper:
             player_win = True if pscore > cscore else False
         
             if player_win:
-                print(f"Congrats the player won!! The final score was: \n Player: {pscore}\nComputer: {cscore}")
-            else: 
-                 print(f"Sorry the computer won :( The final score was: \n Player: {pscore}\nComputer: {cscore}")
+                pwin = f"Congrats the player won!! The final score was: \n Player: {pscore}\nComputer: {cscore}"
+                plose = f"Sorry the computer won :( The final score was: \n Player: {pscore}\nComputer: {cscore}"
+                print (pwin if player_win else plose)
                  
         else:
             # This will print if the game is still going and the display_score function is called
