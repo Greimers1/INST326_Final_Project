@@ -4,14 +4,18 @@ A1: magic method
 Q2: What is 5 + 5?
 A2: 10
 
-Q3: What type of method is __init__?
-A3: magic method
+Q3: Symbol for sodium??
+A3: na
 
-Q4: What type of method is __init__?
-A4: magic method
+Q4: Element for FE?
+A4: iron
 
-Q5: What type of method is __init__?
-A5: magic method
+Q5:What is 3 x 3?
+A5: 9
 
-Q6: What type of method is __init__?
-A6: magic method
+Q6: Capitol of United States?
+A6: dc
+
+Q7: What city is UMD in?
+A7: college park
+
