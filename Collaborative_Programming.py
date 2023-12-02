@@ -9,30 +9,45 @@ class TriviaGame:
     """ 
     
     def __init__(self, line):
-        pattern  = r"""Q(?P<q_number>\d+): (?P<question>.*?[?])\nA(?P<a_number>
-                            \d+): (?P<answer>.*?)$"""
-        matches = re.search(pattern, line)
-        for match in matches:
-            q_number = match.group('q_number')
-            question = match.group('question')
-            a_number = match.group('a_number')
-            answer = match.group('answer')
+        pattern  = r"""Q(?P<q_number>\d+): (?P<question>.*?[?])\sA(?P<a_number>\d+): (?P<answer>.*?)$"""
+        match = re.match(pattern, line)
+        if match:
+            self.q_number = match.group('q_number')
+            self.question = match.group('question')
+            self.a_number = match.group('a_number')
+            self.answer = match.group('answer')
+        else:
+            raise ValueError(f"Invalid line format: {line}")
             
     def read_file(file):
-        with open(file, 'r', encoding = "utf-8") as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             game = [TriviaGame(line.strip()) for line in f]
         return game
-    
+                
     def display_question(self):
         print(f"Question {self.q_number}: {self.question}")
 
     def get_answer(self):
         return input("Your answer: ").strip()
     
-
-
-
-
+class Player:
+    """ Represents the players turn in the game.
+    """
+    def __init__(self):
+        self.score = 0
+    
+    def turn(self, question_number):
+        """ Returns the player's answer for each question. 
+        
+        Args:
+            question_number(int): the question number
+        
+        Returns: 
+            answer(str): the player's answer as a str.
+        """
+        answer = input(f"Your answer for {question_number}: ")
+        return answer
+        
 
 class ScoreKeeper:
     def __init__(self):
@@ -125,27 +140,29 @@ class Timer:
         while self.start_time is not None: 
             time_passed = self.end_time - self.start_time
             print (f"time elasped: {time_passed} seconds ") 
+            break
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Trivia Game')
     parser.add_argument('file_path', help='Path to the file containing trivia questions.')
     args = parser.parse_args()
-    file_path = args.file_path()  
+    file_path = args.file_path  
     
     with open(file_path, 'r', encoding='utf-8') as f:
         games = [TriviaGame(line.strip()) for line in f]
 
+    player = Player()
     score_keeper = ScoreKeeper()
     timer = Timer()
 
     for game in games:
         game.display_question()
         timer.start()
-        player_answer = game.get_answer()
+        player_answer = player.turn(game.q)
         timer.end()
 
         score_keeper.get_player_score(player_answer, game.answer)
         score_keeper.get_computer_score(game.answer)
-        score_keeper.display_score()
+        score_keeper.display_score(game.q_number)
 
     score_keeper.determine_winner()
