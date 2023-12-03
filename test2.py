@@ -64,84 +64,16 @@ class Score:
 
 
 class ScoreKeeper:
-    """Class to keep the score between the player and computer
-    
-    Attributes:
-        player_score (int): The players score
-        computer_score (int): The computers score
-    """
     def __init__(self):
-<<<<<<< HEAD
         self.player_score = Score()
         self.computer_score = Score(human = False)
         
-=======
-        """Initializes the instances of the ScoreKeeper class. Scores set to 0"""
-        
-        self.player_score = 0
-        self.computer_score = 0
-
-    def get_player_score(self, player_answer, correct_answer):
-        """Updates the players score
-        
-        Args:
-            player_answer (str): Players answer to question
-            correct_answer (str): Computers answer to question
-        
-        Side effects:
-            Prints to say if the players score is correct or not
-        """
-        
-        print(f"Player Answer: {player_answer}")
-        if correct_answer is not None:
-            print(f"Correct Answer: {correct_answer.lower()}")
-            
-            if player_answer and player_answer.lower() == correct_answer.lower():
-                self.player_score += 1
-                print(f"You now have {self.player_score} points!")
-            else:
-    
-                print(f"You now have {self.player_score} points.")
-        else:
-            print("Invalid question format. Cannot determine correct answer.")
-
-    def get_computer_score(self, correct_answer):
-        """Updates the computers score
-        
-        Args:
-            correct_answer (str): Correct answer to the question
-        
-        Side effects:
-            Print to say if the computers score is correct or not
-        """
-        
-        if correct_answer is not None:
-            computer_answer = random.choice(['beep bopp', correct_answer])
-            print(f"Computer's answer: {computer_answer}, Correct: {computer_answer.lower() == correct_answer.lower()}")
-            if computer_answer.lower() == correct_answer.lower():
-                self.computer_score += 1
-                print(f"Computer now has {self.computer_score} points!")
-            else:
-                print(f"Computer now has {self.computer_score} points.")
-        else:
-            print("Invalid question format. Cannot determine correct answer.")
-
->>>>>>> c86e8ad91f9474a46bc86dbf934500d570406b62
     def display_score(self):
-        """Displays the score between the player and the computer"""
-       
         print(f"Player: {self.player_score} | Computer: {self.computer_score}")
 
     def determine_winner(self):
-<<<<<<< HEAD
         margin = abs(self.player_score - self.computer_score)
-=======
-        """
-        Determines the winner between the player and computer, and prints 
-        the score
-        """
         
->>>>>>> c86e8ad91f9474a46bc86dbf934500d570406b62
         if self.player_score > self.computer_score:
             print(f"Congratulations! You win by {margin} points!")
         elif self.player_score < self.computer_score:
