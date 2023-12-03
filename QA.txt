@@ -2,7 +2,7 @@ Q1: What type of method is __init__?
 A1: magic method
 
 Q2: What is 5 + 5?
-A2: ten
+A2: 10
 
 Q3: Symbol for sodium?
 A3: na
@@ -11,7 +11,7 @@ Q4: Element for FE?
 A4: iron
 
 Q5: What is 3 x 3?
-A5: nine
+A5: 9
 
 Q6: Capitol of United States?
 A6: dc

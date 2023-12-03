@@ -30,50 +30,65 @@ class TriviaGame:
             print(f"Answer {self.a_number}: {self.answer}")
 
     def get_answer(self):
-        if self.question:
             return input("Your answer: ").strip()
+
+class Score:
+    def __init__(self, human = True):
+        self.player_score = 0
+        self.human = human
+        self.pronoun = "Player" if human else "Computer"
+        
+    def __str__(self):
+        return f"{self.player_score}"
+    
+    def __lt__(self, other):
+        return self.player_score < other.player_score
+                   
+    def __gt__(self, other):
+        return self.player_score > other.player_score
+    
+    def __sub__(self, other):
+        return self.player_score - other.player_score
+
+    def get_score(self, player_answer, correct_answer):
+        print(f"{self.pronoun} Answer: {player_answer}")
+        if correct_answer is not None:
+            if player_answer and player_answer.lower() == correct_answer.lower():
+                self.player_score += 1
+                print(f"{self.pronoun} now has {self.player_score} points!")
+            else:
+    
+                print(f"{self.pronoun} now has {self.player_score} points.")
+        else:
+            print("Invalid question format. Cannot determine correct answer.")
+
 
 class ScoreKeeper:
     def __init__(self):
-        self.player_score = 0
-        self.computer_score = 0
-
-    def get_player_score(self, player_answer, correct_answer):
-        print(f"Player Answer: {player_answer}")
-        if correct_answer is not None:
-            print(f"Correct Answer: {correct_answer.lower()}")
-            
-            if player_answer and player_answer.lower() == correct_answer.lower():
-                self.player_score += 1
-                print(f"You now have {self.player_score} points!")
-            else:
-    
-                print(f"You now have {self.player_score} points.")
-        else:
-            print("Invalid question format. Cannot determine correct answer.")
-
-    def get_computer_score(self, correct_answer):
-        if correct_answer is not None:
-            computer_answer = random.choice(['beep bopp', correct_answer])
-            print(f"Computer's answer: {computer_answer}, Correct: {computer_answer.lower() == correct_answer.lower()}")
-            if computer_answer.lower() == correct_answer.lower():
-                self.computer_score += 1
-                print(f"Computer now has {self.computer_score} points!")
-            else:
-                print(f"Computer now has {self.computer_score} points.")
-        else:
-            print("Invalid question format. Cannot determine correct answer.")
-
+        self.player_score = Score()
+        self.computer_score = Score(human = False)
+        
     def display_score(self):
         print(f"Player: {self.player_score} | Computer: {self.computer_score}")
 
     def determine_winner(self):
+        margin = abs(self.player_score - self.computer_score)
         if self.player_score > self.computer_score:
-            print("Congratulations! You win!")
+            print(f"Congratulations! You win by {margin} points!")
         elif self.player_score < self.computer_score:
-            print("Sorry, the computer wins.")
+            print(f"Sorry, the computer wins by {margin} points.")
         else:
             print("It's a tie!")
+            
+    def get_score(self, player_answer, correct_answer, human):
+        if human:
+            self.player_score.get_score(player_answer, correct_answer)
+        else:
+            self.computer_score.get_score(player_answer, correct_answer)
+        
+        
+
+
 
 class Timer:
     def __init__(self):
@@ -106,21 +121,23 @@ def run_game(file_path):
                     print(f"Error on line {line_number}: {e}")
 
     score_keeper = ScoreKeeper()
+    
     timer = Timer()
 
     for question, answer in zip(questions, answers):
         question.display_question()
-        print("displayed question")
+        
         timer.start()
-        print("started timer")
+        print("Started Timer")
         player_answer = question.get_answer()
         print(f"{player_answer!r}")
         timer.end()
-        print("ended timer")
-
-        score_keeper.get_player_score(player_answer, answer.answer)
-        print(f"{player_answer}")
-        score_keeper.get_computer_score(answer.answer)
+        print("Ended timer")
+        
+        computer_answer = random.choice(['beep boop', answer.answer])
+        print(f"Correct Answer: {answer.answer.lower()}")
+        score_keeper.get_score(player_answer, answer.answer, human = True)
+        score_keeper.get_score(computer_answer, answer.answer, human = False)
         score_keeper.display_score()
 
     score_keeper.determine_winner()
