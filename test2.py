@@ -51,7 +51,10 @@ class ScoreKeeper:
         
         Args:
             player_answer (str): Players answer to question
-            computer_answer (str): Computers answer to question
+            correct_answer (str): Computers answer to question
+        
+        Side effects:
+            Prints to say if the players score is correct or not
         """
         
         print(f"Player Answer: {player_answer}")
@@ -72,6 +75,9 @@ class ScoreKeeper:
         
         Args:
             correct_answer (str): Correct answer to the question
+        
+        Side effects:
+            Print to say if the computers score is correct or not
         """
         
         if correct_answer is not None:
