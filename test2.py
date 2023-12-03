@@ -5,19 +5,19 @@ import random
 
 class TriviaGame:
     def __init__(self, line):
-        question_pattern = r"Q(\d+): (.+)$"
-        answer_pattern = r"A(\d+): (.+)$"
+        question_pattern = r"Q(?P<qnum>\d+): (?P<question>.+)$"
+        answer_pattern = r"A(?P<anum>\d+): (?P<answer>.+)$"
 
         question_match = re.match(question_pattern, line)
         answer_match = re.match(answer_pattern, line)
 
         if question_match:
-            self.q_number = int(question_match.group(1))
-            self.question = question_match.group(2)
+            self.q_number = int(question_match.group('qnum'))
+            self.question = question_match.group('question')
             self.answer = None  # Set answer to None for questions
         elif answer_match:
-            self.a_number = int(answer_match.group(1))
-            self.answer = answer_match.group(2)  # Set answer for answers
+            self.a_number = int(answer_match.group('anum'))
+            self.answer = answer_match.group('answer')  # Set answer for answers
             self.q_number = None  # Set q_number to None for answers
             self.question = None  # Set question to None for answers
         else:
