@@ -24,16 +24,14 @@ class TriviaGame:
             raise ValueError(f"Invalid format for trivia line: {line}")
 
     def display_question(self):
-        if hasattr(self, 'question') and self.question:
+        if self.question:
             print(f"Question {self.q_number}: {self.question}")
-        elif hasattr(self, 'answer') and self.answer:
+        elif self.answer:
             print(f"Answer {self.a_number}: {self.answer}")
 
     def get_answer(self):
-        if hasattr(self, 'question') and self.question:
+        if self.question:
             return input("Your answer: ").strip()
-        else:
-            return None  # No need to get an answer for answers
 
 class ScoreKeeper:
     def __init__(self):
@@ -91,33 +89,38 @@ class Timer:
         print(f"Time elapsed: {time_passed} seconds")
 
 def run_game(file_path):
-    games = []
+    questions = []
+    answers = []
+
     with open(file_path, 'r', encoding='utf-8') as f:
         for line_number, line in enumerate(f, start=1):
             line = line.strip()
             if line:  # Skip empty lines
                 try:
                     game = TriviaGame(line)
-                    games.append(game)
+                    if game.question:
+                        questions.append(game)
+                    elif game.answer:
+                        answers.append(game)
                 except ValueError as e:
                     print(f"Error on line {line_number}: {e}")
 
     score_keeper = ScoreKeeper()
     timer = Timer()
 
-    for game in games:
-        game.display_question()
+    for question, answer in zip(questions, answers):
+        question.display_question()
         print("displayed question")
         timer.start()
         print("started timer")
-        player_answer = game.get_answer()
+        player_answer = question.get_answer()
         print(f"{player_answer!r}")
         timer.end()
         print("ended timer")
 
-        score_keeper.get_player_score(player_answer, game.answer)
+        score_keeper.get_player_score(player_answer, answer.answer)
         print(f"{player_answer}")
-        score_keeper.get_computer_score(game.answer)
+        score_keeper.get_computer_score(answer.answer)
         score_keeper.display_score()
 
     score_keeper.determine_winner()
