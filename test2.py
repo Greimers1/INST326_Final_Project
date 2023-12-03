@@ -34,11 +34,26 @@ class TriviaGame:
             return input("Your answer: ").strip()
 
 class ScoreKeeper:
+    """Class to keep the score between the player and computer
+    
+    Attributes:
+        player_score (int): The players score
+        computer_score (int): The computers score
+    """
     def __init__(self):
+        """Initializes the instances of the ScoreKeeper class. Scores set to 0"""
+        
         self.player_score = 0
         self.computer_score = 0
 
     def get_player_score(self, player_answer, correct_answer):
+        """Updates the players score
+        
+        Args:
+            player_answer (str): Players answer to question
+            computer_answer (str): Computers answer to question
+        """
+        
         print(f"Player Answer: {player_answer}")
         if correct_answer is not None:
             print(f"Correct Answer: {correct_answer.lower()}")
@@ -53,6 +68,12 @@ class ScoreKeeper:
             print("Invalid question format. Cannot determine correct answer.")
 
     def get_computer_score(self, correct_answer):
+        """Updates the computers score
+        
+        Args:
+            correct_answer (str): Correct answer to the question
+        """
+        
         if correct_answer is not None:
             computer_answer = random.choice(['beep bopp', correct_answer])
             print(f"Computer's answer: {computer_answer}, Correct: {computer_answer.lower() == correct_answer.lower()}")
@@ -65,9 +86,16 @@ class ScoreKeeper:
             print("Invalid question format. Cannot determine correct answer.")
 
     def display_score(self):
+        """Displays the score between the player and the computer"""
+       
         print(f"Player: {self.player_score} | Computer: {self.computer_score}")
 
     def determine_winner(self):
+        """
+        Determines the winner between the player and computer, and prints 
+        the score
+        """
+        
         if self.player_score > self.computer_score:
             print("Congratulations! You win!")
         elif self.player_score < self.computer_score:
