@@ -2,6 +2,7 @@ import re
 import argparse
 import time
 import random
+import pandas as pd
 
 class TriviaGame:
     def __init__(self, line):
@@ -64,14 +65,29 @@ class Score:
 
 
 class ScoreKeeper:
+    """Class to keep the score between the player and computer
+    
+    Attributes:
+        player_score (int): The players score
+        computer_score (int): The computers score
+    """
     def __init__(self):
+        """Initializes the instances of the ScoreKeeper class. Scores set to 0"""
+        
         self.player_score = Score()
         self.computer_score = Score(human = False)
         
     def display_score(self):
+        """Displays the score between the player and the computer"""
+        
         print(f"Player: {self.player_score} | Computer: {self.computer_score}")
 
     def determine_winner(self):
+        """
+        Determines the winner between the player and computer, and prints 
+        the score
+        """
+        
         margin = abs(self.player_score - self.computer_score)
         
         if self.player_score > self.computer_score:
@@ -80,8 +96,10 @@ class ScoreKeeper:
             print(f"Sorry, the computer wins by {margin} points.")
         else:
             print("It's a tie!")
+        
             
     def get_score(self, player_answer, correct_answer, human):
+        """Docstring TBD"""
         if human:
             self.player_score.get_score(player_answer, correct_answer)
         else:
