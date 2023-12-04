@@ -2,7 +2,7 @@ import re
 import argparse
 import time
 import random
-import pandas as pd
+
 
 class TriviaGame:
     def __init__(self, line):
