@@ -119,7 +119,7 @@ class Timer:
 
     def end(self):
         self.end_time = time.time()
-        time_passed = self.end_time - self.start_time
+        time_passed = round((self.end_time - self.start_time0),2)
         print(f"Time elapsed: {time_passed} seconds")
 
 def run_game(file_path):
