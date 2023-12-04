@@ -2,7 +2,8 @@ import re
 import argparse
 import time
 import random
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 class TriviaGame:
     def __init__(self, line):
@@ -96,14 +97,23 @@ class ScoreKeeper:
             print(f"Sorry, the computer wins by {margin} points.")
         else:
             print("It's a tie!")
-          
-        
         
             
     def get_score(self, player_answer, correct_answer, human):
-        """Docstring TBD""" 
-        self.player_score.get_score(player_answer, correct_answer) if human else self.computer_score.get_score(player_answer, correct_answer)
+        """Docstring TBD"""
+        if human:
+            self.player_score.get_score(player_answer, correct_answer)
+        else:
+            self.computer_score.get_score(player_answer, correct_answer)
         
+    def display_score_plot(self):
+        """Displays a bar plot of the scores between the player and the computer."""
+        scores = {'Player': self.player_score.player_score, 'Computer': self.computer_score.player_score}
+        sns.barplot(x=list(scores.keys()), y=list(scores.values()))
+        plt.title('Score Comparison')
+        plt.xlabel('Player')
+        plt.ylabel('Score')
+        plt.show()
         
 
 
@@ -118,8 +128,8 @@ class Timer:
 
     def end(self):
         self.end_time = time.time()
-        time_passed = round((self.end_time - self.start_time0),2)
-        print(f"Time elapsed: {time_passed} seconds")
+        time_passed = self.end_time - self.start_time
+        print(f"Time elapsed: {round(time_passed, 2)} seconds")
 
 def run_game(file_path):
     questions = []
@@ -143,15 +153,11 @@ def run_game(file_path):
     timer = Timer()
 
     for question, answer in zip(questions, answers):
-        
-        question.display_question()
-        
         timer.start()
         print("Started Timer")
-        
+        question.display_question()
         player_answer = question.get_answer()
         print(f"{player_answer!r}")
-        
         timer.end()
         print("Ended timer")
         
@@ -162,7 +168,8 @@ def run_game(file_path):
         score_keeper.display_score()
 
     score_keeper.determine_winner()
-    
+    score_keeper.display_score_plot()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Trivia Game')
