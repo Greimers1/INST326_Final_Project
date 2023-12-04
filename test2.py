@@ -96,14 +96,13 @@ class ScoreKeeper:
             print(f"Sorry, the computer wins by {margin} points.")
         else:
             print("It's a tie!")
+          
+        
         
             
     def get_score(self, player_answer, correct_answer, human):
-        """Docstring TBD"""
-        if human:
-            self.player_score.get_score(player_answer, correct_answer)
-        else:
-            self.computer_score.get_score(player_answer, correct_answer)
+        """Docstring TBD""" 
+        self.player_score.get_score(player_answer, correct_answer) if human else self.computer_score.get_score(player_answer, correct_answer)
         
         
 
@@ -144,12 +143,15 @@ def run_game(file_path):
     timer = Timer()
 
     for question, answer in zip(questions, answers):
+        
         question.display_question()
         
         timer.start()
         print("Started Timer")
+        
         player_answer = question.get_answer()
         print(f"{player_answer!r}")
+        
         timer.end()
         print("Ended timer")
         
@@ -160,6 +162,7 @@ def run_game(file_path):
         score_keeper.display_score()
 
     score_keeper.determine_winner()
+    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Trivia Game')
