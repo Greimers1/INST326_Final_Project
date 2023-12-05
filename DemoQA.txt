@@ -1,0 +1,15 @@
+Q1: How Did We Make This Program?
+A1: Hard work 
+
+Q2: What section are we in?
+A2: 0102
+
+Q3: Who is the best INFO College Professor?
+A3: Aric
+
+Q4: How do you move changes from local to remote repository?
+A4: Git Push
+
+Q5: Should we have all dropped this class when we had the chance?
+A5: Absolutely
+
