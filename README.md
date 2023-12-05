@@ -1,25 +1,25 @@
 # INST326_Final_Project
 Final Project Repository
 
-#Purpose:
+# Purpose:
 * QA.txt - A sample text file with questions and answers to them, the format specifically is necessary for the program to run
 * QuizGame.py - The python file on which the program is stored and is run through a command line argument
 * README.md - This file, which has the credits, and explanation about the program
 
 
-#Instructions:
+# Instructions:
 * Run the file from the command line, the only two arguments needed are QuizGame.py and the text file you plan on using for the quiz
 * This program is a quiz game, we reccomend using it as a study guide by writing your own questions into the text file
 * Think of it like Kahoot/Quizlet where you can test yourself on your knowledge, this project is also open source so you may tweak your version as you wish 
 
 
-#Rules
+# Rules
 * Do not use '.' for abbreviations, (i.e, use DC/dc instead of D.C/d.c)
 * The answers are not case-senstive
 
 
 
-#Attribution:
+# Attribution:
 
 | Method/Function                     | Primary Author | Techniques Demonstrated|
 | ----------------------------------- | -------------- | -----------------------|
