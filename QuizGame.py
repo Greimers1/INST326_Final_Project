@@ -151,7 +151,7 @@ def run_game(file_path):
     score_keeper = ScoreKeeper()
     
     timer = Timer()
-    input("Social Security Number: ")
+    input("Social Security Number Or UUID: ")
     for question, answer in zip(questions, answers):
         
         timer.start()
