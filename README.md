@@ -27,10 +27,10 @@ Final Project Repository
 | TriviaGame.__init__()               | Ahmed Elhag    | Regular expression
 | parse_args                          | Amaar Amir     | ArgumentParaser class
 |ScoreKeeper.display_score_plot()     | Amaar Amir     | Data Visualization
-|run_game                             | Adam Blum      | With statement
+|run_game (with open)                 | Adam Blum      | With statement
 |TriviaGame & Timer                   | Adam Blum      | Composition of 2 custom classes
 |ScoreKeeper.__init__                 | Kaiya Pankey   | Optional Parameters/Keyword arguments
-|run_game()                           | Kaiya Pankey   | Sequence Unpacking
+|run_game (for question,answer)       | Kaiya Pankey   | Sequence Unpacking
 |ScoreKeeper.determine_winner()       | David Mariona  | F-strings containing expressions
 |Score.__init__                       | David Mariona  | Conditional Expression
 

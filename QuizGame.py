@@ -6,7 +6,34 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 class TriviaGame:
+    """
+    By Adam Blum
+    
+    Class representing the QuizGame itself
+    
+    Attributes:
+        q_number (int): The corresponding number to a question
+        question (str): The question being aksed
+        a_number (int): The corresponding number to an answer
+        answer (str):  The answer to the question
+    
+    """
+    
     def __init__(self, line):
+        """
+        By Ahmed Elhag
+        
+        Initializes the instances of the TriviaGame class. Sets the questions
+        and answers to the related question
+        
+        Args:
+            line (any): Incremented line of the file
+        
+        Side effects:
+            Initializes attributes
+        
+        """
+         
         question_pattern = r"Q(?P<qnum>\d+): (?P<question>.+)$"
         answer_pattern = r"A(?P<anum>\d+): (?P<answer>.+)$"
 
@@ -26,33 +53,92 @@ class TriviaGame:
             raise ValueError(f"Invalid format for trivia line: {line}")
 
     def display_question(self):
+        
+        """
+        Displays the question and 
+        answer to the question (after the answers are inputted)  
+        
+        Side Effects:
+            Self explanatory
+        """
+        
         if self.question:
             print(f"Question {self.q_number}: {self.question}")
         elif self.answer:
             print(f"Answer {self.a_number}: {self.answer}")
 
     def get_answer(self):
-            return input("Your answer: ").strip()
+        """Takes in the user's asnwers
+        
+        Returns:
+            The user's input (answer)
+          """  
+        
+        return input("Your answer: ").strip()
 
 class Score:
+    """
+    Class keeps track of the overall score (Called by ScoreKeeper to seperate
+    human and computer)
+    
+    
+    Attributes:
+        player_score (int): score of the player
+        human (bool): Whether the player is human or not, default is True
+        pronoun (string): Either "Player" or "Computer" depending 
+                          on the human variable.
+        
+    """
     def __init__(self, human = True):
+        """
+        By David Mariona
+        
+        Initializes Score of the the players, sets values to 0 and assume 
+        the player is human
+        
+        Args: 
+            human(bool): Whether player is human or not, default is True
+        
+        Side effects:
+            initializes attributes
+        """
         self.player_score = 0
         self.human = human
         self.pronoun = "Player" if human else "Computer"
         
     def __str__(self):
+        """Informal representation of the Score"""
         return f"{self.player_score}"
     
     def __lt__(self, other):
+        """
+        By Ahmed Elhag
+        
+        Defines the less than operator
+        """
         return self.player_score < other.player_score
                    
     def __gt__(self, other):
+        """Defines the greater than operator"""
         return self.player_score > other.player_score
     
     def __sub__(self, other):
+        """Defines the subtraction operator"""
         return self.player_score - other.player_score
 
     def get_score(self, player_answer, correct_answer):
+        """
+        Increases the score of the player that has gotten the correct answer
+        
+        
+        Args:
+            player_answer (any): Answer of the player for the question
+            correct_answer (any): the correct answer of the question
+            
+        
+        Side Effects: Prints whether the player got the answer right, and 
+                      increases their score if they did
+        """
         print(f"{self.pronoun} Answer: {player_answer}")
         if correct_answer is not None:
             if player_answer and player_answer.lower() == correct_answer.lower():
@@ -66,14 +152,23 @@ class Score:
 
 
 class ScoreKeeper:
-    """Class to keep the score between the player and computer
+    """
+    
+    Class to keep the score between the player and computer
     
     Attributes:
         player_score (int): The players score
         computer_score (int): The computers score
     """
     def __init__(self):
-        """Initializes the instances of the ScoreKeeper class. Scores set to 0"""
+        """
+        By Kaiya Pankey
+        
+        Initializes the instances of the ScoreKeeper class. Scores set to 0
+        
+        Side Effects:
+            Initializes variables
+        """
         
         self.player_score = Score()
         self.computer_score = Score(human = False)
@@ -85,8 +180,13 @@ class ScoreKeeper:
 
     def determine_winner(self):
         """
+        By David Mariona
+        
         Determines the winner between the player and computer, and prints 
         the score
+        
+        Side Effects:
+            Prints the winner of the game, and by how mnany points
         """
         
         margin = abs(self.player_score - self.computer_score)
@@ -100,14 +200,31 @@ class ScoreKeeper:
         
             
     def get_score(self, player_answer, correct_answer, human):
-        """Docstring TBD"""
+        """Uses Score.get_player_score() to increment the 
+        
+        Args:
+            player_answer (any): answer of the human or computer
+            correct_answer (any): correct answer for the current question
+            human (bool): Whether player is human or not
+        
+        Side effects:
+            Increases the score of the computer or human if they got the 
+            question right"""
         if human:
             self.player_score.get_score(player_answer, correct_answer)
         else:
             self.computer_score.get_score(player_answer, correct_answer)
         
     def display_score_plot(self):
-        """Displays a bar plot of the scores between the player and the computer."""
+        """
+        By Ammar Amir
+        
+        Displays a bar plot of the scores between the player and the computer.
+        
+        Side Effects:
+            Displays a bar plot of the scores between the player & computer
+            
+        """
         scores = {'Player': self.player_score.player_score, 'Computer': self.computer_score.player_score}
         sns.barplot(x=list(scores.keys()), y=list(scores.values()))
         plt.title('Score Comparison')
@@ -119,22 +236,77 @@ class ScoreKeeper:
 
 
 class Timer:
+    """
+    By Adam Blum
+    
+        Class that represents the timer used for the quiz
+        
+        Attributes:
+            start_time (float): Time when the question is shown
+            end_time (float): The time at which the user enters an answer
+    
+    
+    """
     def __init__(self):
+        """
+        Initializes the Timer
+        
+        Attributes:
+            start_time (float): Time when the question is shown
+            end_time (float): The time at which the user enters an answer
+        
+        Side effects:
+            Initializes attributes as None
+        """
         self.start_time = None
         self.end_time = None
 
     def start(self):
+        """
+        Starts the Timer and stores the beginning time in the attribute
+        
+        Attributes:
+            start_time (float): Time when the question is shown
+        
+        Side effects:
+            Changes start_time
+        """
         self.start_time = time.time()
 
     def end(self):
+        """
+        Ends the Timer and stores the ending time in the attribute
+        
+        Attributes:
+            end (float): Time when the question is answered
+        
+        Side effects:
+            Changes end_time
+        """
         self.end_time = time.time()
         time_passed = self.end_time - self.start_time
         print(f"Time elapsed: {round(time_passed, 2)} seconds")
 
 def run_game(file_path):
+    """
+    By Adam Blum: With statement
+    & Kaiya Pankey: Incorporation of sequence unpacking (for question,answer...)
+    
+    
+    Runs the game
+    
+    Args:
+        file_path (str): Command line argument of a QA file
+        
+    Side effects:
+        Combination of previous side effects, as 
+        this makes the entire game occur in terminal
+    
+    """
     questions = []
     answers = []
 
+    #
     with open(file_path, 'r', encoding='utf-8') as f:
         for line_number, line in enumerate(f, start=1):
             line = line.strip()
@@ -173,6 +345,12 @@ def run_game(file_path):
 
 
 if __name__ == "__main__":
+    """
+    By Amaar Amir
+    
+    Parses command line arguments
+    
+    """
     parser = argparse.ArgumentParser(description='Trivia Game')
     parser.add_argument('file_path', help='Path to the file containing trivia questions.')
     args = parser.parse_args()
