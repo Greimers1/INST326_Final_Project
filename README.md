@@ -34,5 +34,21 @@ Final Project Repository
 |ScoreKeeper.determine_winner()       | David Mariona  | F-strings containing expressions
 |Score.__init__                       | David Mariona  | Conditional Expression
 
+# Clarification and Apology
+The reason our commit history is slightly different from our attribution table 
+is due to a mixture of technological issues and migration of code across 
+different files. While working on this project, our group had split ourselves 
+between the “original” file and a “test” file. Throughout the process, we had 
+been soft-merging these versions. To elaborate, we would migrate code between 
+the versions until we had a “true” file in which the QuizGame ran perfectly. 
+This ended up being the “test2” file. However, these migrations had caused our 
+commit history to display a different image of accreditation than is fact. 
 
+Going back to the technical issues, there were times where we worked in person 
+where we acted as drivers and navigators for certain aspects of our code. 
+So the commit containing the code for someones work would come from someone else. 
+
+We deeply apologize for the confusion and misunderstanding. 
+As this is our first long-term coding project using GitHub, 
+we will strive to ensure that these mistakes never happen again. 
 
